@@ -1,0 +1,173 @@
+﻿<Window x:Class="DarkAppShutdown.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Green Shutdown by Jimmy"
+        Height="401" Width="600"
+        Background="#1b1f24"
+        WindowStyle="None" AllowsTransparency="True"
+        Icon="D:\c#\RelaxPC\relaxPC icon.ico">
+
+    <Window.Resources>
+        <!-- Style Bouton avec Dégradé Dynamique et Effet de Vague -->
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#26a69a" Offset="0.0"/>
+                        <GradientStop Color="#004d40" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#00332b"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" Color="#1de9b6" ShadowDepth="3"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#00796b" Offset="0.0"/>
+                                <GradientStop Color="#004d40" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style pour le ComboBox -->
+        <Style TargetType="ComboBox" x:Key="CustomComboBoxStyle">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="#26a69a"/>
+            <Setter Property="BorderBrush" Value="#00332b"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton x:Name="ToggleButton"
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press"
+                                          Background="{TemplateBinding Background}"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter x:Name="ContentSite"
+                                                  Content="{TemplateBinding SelectionBoxItem}"
+                                                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                  Margin="5"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"/>
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Grid>
+                                            <Border x:Name="Border"
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="5"/>
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                            <Path x:Name="Arrow"
+                                                  Data="M 0 0 L 4 4 L 8 0 Z"
+                                                  HorizontalAlignment="Right"
+                                                  VerticalAlignment="Center"
+                                                  Margin="0,0,10,0"
+                                                  Fill="White"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <Popup x:Name="Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Grid x:Name="DropDown"
+                                      SnapsToDevicePixels="True"
+                                      MinWidth="{TemplateBinding ActualWidth}"
+                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder"
+                                            Background="#1b1f24"
+                                            BorderBrush="#00332b"
+                                            BorderThickness="2"
+                                            CornerRadius="5"/>
+                                    <ScrollViewer Margin="4,6,4,6"
+                                                  SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True"
+                                                    KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <!-- Zone de déplacement de la fenêtre -->
+        <Grid x:Name="TitleBar" Height="50" Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown" Margin="0,10,0,340">
+            <Border Background="#2c313a" BorderBrush="#1de9b6" BorderThickness="0,0,0,2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Foreground="#1de9b6" FontSize="24" FontWeight="Bold">
+                    Relax ton PC man
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Contenu principal -->
+        <StackPanel Margin="0,65,0,0" VerticalAlignment="Top">
+            <!-- Description -->
+            <TextBlock Text="Gestion d'Arrêt Système par Jimmy" Foreground="White" FontSize="14" HorizontalAlignment="Center"/>
+
+            <!-- Nouvelle interface pour la sélection du délai -->
+
+            <!-- Affichage du compte à rebours -->
+            <TextBlock x:Name="CountdownTextBlock" Text="" Foreground="White" FontSize="16" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+
+            <!-- Boutons d'actions avec icônes -->
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,224,0,121">
+            <Button Content="🛑 Arrêter" Width="120" Click="ShutdownButton_Click"/>
+            <Button Content="🔄 Redémarrer" Width="133" Click="RestartButton_Click"/>
+            <Button Content="💤 Veille" Width="120" Click="SleepButton_Click"/>
+            <Button Content="❌ Annuler" Width="120" Click="CancelButton_Click"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="164,120,164,236">
+            <TextBox x:Name="TimeValueTextBox" Width="100" Height="27" Margin="5" Text="1" HorizontalContentAlignment="Center" FontSize="16" Background="#FF26A69A"/>
+            <ComboBox x:Name="TimeUnitComboBox" Width="150" Height="32" SelectedIndex="1" Style="{StaticResource CustomComboBoxStyle}">
+                <ComboBoxItem Content="Secondes"/>
+                <ComboBoxItem Content="Minutes"/>
+                <ComboBoxItem Content="Heures"/>
+            </ComboBox>
+        </StackPanel>
+
+    </Grid>
+</Window>
