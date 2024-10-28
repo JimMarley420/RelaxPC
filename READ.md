@@ -4,4 +4,4 @@ This code is mine, dont take it for you. if you have any question go on discord 
 
 ## Reporting a Vulnerability
 
-go on discord : jim_marley
+go on [github Issues](https://github.com/JimMarley420/RelaxPC/issues)
