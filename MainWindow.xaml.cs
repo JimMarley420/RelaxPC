@@ -1,3 +1,5 @@
+// By Jimmy Marley
+
 ﻿using System;
 using System.Diagnostics;
 using System.Media;
@@ -10,7 +12,6 @@ namespace DarkAppShutdown
 {
     public partial class MainWindow : Window
     {
-        private readonly SoundPlayer _soundPlayer = new SoundPlayer("relax_music.wav"); // Fichier audio de fond
         private bool isCountdownActive = false;
 
         public MainWindow()
@@ -106,18 +107,14 @@ namespace DarkAppShutdown
             });
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            _soundPlayer.PlayLooping(); // Lance la musique de fond
-        }
+
 
         private void DisplayNotification(string message)
         {
-            // Vous pouvez personnaliser cette partie pour afficher des notifications plus élégantes
             MessageBox.Show(message, "Green Shutdown", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        // Permettre le déplacement de la fenêtre
+        // déplacement de la fenêtre
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
