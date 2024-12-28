@@ -1,7 +1,15 @@
-# Privacy 
+# Politique de Confidentialité 🔒
 
-This code is mine, dont sell it ONLY for use. if you have any question go on discord : jim_marley
+Ce code est **propriétaire** et strictement réservé à un **usage personnel**.  
+🚫 Toute **redistribution**, **commercialisation**, ou **utilisation non autorisée** est strictement interdite.  
 
-## Reporting a Vulnerability
+### ❓ Vous avez une question ?  
+📩 Contactez-moi directement sur **Discord** : **jim_marley**.
 
-go on [github Issues](https://github.com/JimMarley420/RelaxPC/issues)
+---
+
+## 🛠️ Signaler un bug
+
+🔍 Si vous identifiez une vulnérabilité ou un problème, merci de le signaler via [GitHub Issues](https://github.com/JimMarley420/RelaxPC/issues).  
+Votre contribution aide à améliorer la sécurité et la qualité du projet ! 💡
+
